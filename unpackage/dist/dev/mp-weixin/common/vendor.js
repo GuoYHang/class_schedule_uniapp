@@ -9623,6 +9623,115 @@ function normalizeComponent (
 
 /***/ }),
 /* 33 */
+/*!**********************************************************************************!*\
+  !*** /Users/gyh/workplace/class-schedule/class_schedule_uniapp/plugins/index.js ***!
+  \**********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _colors = _interopRequireDefault(__webpack_require__(/*! ./colors.js */ 34));
+var _tabs = _interopRequireDefault(__webpack_require__(/*! ./tabs.js */ 35));
+var _default = {
+  // vue提供install可供我们开发新的插件及全局注册组件等
+  install: function install(Vue) {
+    Vue.prototype.$tab = _tabs.default;
+    Vue.prototype.$color = _colors.default;
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 34 */
+/*!***********************************************************************************!*\
+  !*** /Users/gyh/workplace/class-schedule/class_schedule_uniapp/plugins/colors.js ***!
+  \***********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+var colors = ["#AEEC34", "#FFC44F", "#85B0FD", "#FEA17C", "#FF9392", "#D48DF9", "#7FCFF8", "#85B8CF", "#90C652", "#D8AA5A", "#FC9F9D", "#0A9A84", "#61BC69", "#12AEF3", "#E29AAD"];
+module.exports = colors;
+
+/***/ }),
+/* 35 */
+/*!*********************************************************************************!*\
+  !*** /Users/gyh/workplace/class-schedule/class_schedule_uniapp/plugins/tabs.js ***!
+  \*********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/**
+ * 关闭所有页面，打开到应用内的某个页面
+ * @param {Object} url
+ */
+function reLaunch(url) {
+  return uni.reLaunch({
+    url: url
+  });
+}
+
+/**
+ * 跳转到tabBar页面，并关闭其他所有非tabBar页面
+ * @param {Object} url
+ */
+function switchTab(url) {
+  return uni.switchTab({
+    url: url
+  });
+}
+
+/**
+ * 关闭当前页面，跳转到应用内的某个页面
+ * @param {Object} url
+ */
+function redirectTo(url) {
+  return uni.redirectTo({
+    url: url
+  });
+}
+
+/**
+ * 保留当前页面，跳转到应用内的某个页面
+ * @param {Object} url
+ */
+function navigateTo(url) {
+  return uni.navigateTo({
+    url: url
+  });
+}
+
+/**
+ * 关闭当前页面，返回上一页活多级页面
+ */
+function navigateBack() {
+  return uni.navigateBack();
+}
+var _default = {
+  reLaunch: reLaunch,
+  switchTab: switchTab,
+  redirectTo: redirectTo,
+  navigateTo: navigateTo,
+  navigateBack: navigateBack
+};
+exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
+
+/***/ }),
+/* 36 */
 /*!******************************************************************************************!*\
   !*** /Users/gyh/workplace/class-schedule/class_schedule_uniapp/uni.promisify.adaptor.js ***!
   \******************************************************************************************/
@@ -9643,6 +9752,111 @@ uni.addInterceptor({
   }
 });
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
+
+/***/ }),
+/* 37 */,
+/* 38 */,
+/* 39 */,
+/* 40 */,
+/* 41 */,
+/* 42 */,
+/* 43 */
+/*!*******************************************************************************!*\
+  !*** /Users/gyh/workplace/class-schedule/class_schedule_uniapp/utils/date.js ***!
+  \*******************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _default = {
+  genBetweenDates: function genBetweenDates(startDateStr, endDateStr) {
+    var startDate = this.strToDate(startDateStr);
+    var endDate = this.strToDate(endDateStr);
+    var dateStrList = [];
+    while (startDate <= endDate) {
+      dateStrList.push(startDate);
+      startDate = this.dateAddDay(startDate, 1);
+    }
+    return dateStrList;
+  },
+  /**
+   * @param {Object} dateStr yyyy-MM-dd to date
+   */
+  strToDate: function strToDate(dateStr) {
+    dateStr = dateStr.replace(/-/g, "/"); //现将yyyy-MM-dd类型转换为yyyy/MM/dd
+    var dateTime = Date.parse(dateStr); //将日期字符串转换为表示日期的秒数
+    //注意：Date.parse(dateStr)默认情况下只能转换：月/日/年 格式的字符串，但是经测试年/月/日格式的字符串也能被解析
+    var date = new Date(dateTime); //将日期秒数转换为日期格式
+    return date;
+  },
+  dateToStr: function dateToStr(date) {
+    var year = date.getFullYear();
+    var month = (date.getMonth() + 1).toString();
+    var day = date.getDate().toString();
+    if (month.length == 1) {
+      month = "0" + month;
+    }
+    if (day.length == 1) {
+      day = "0" + day;
+    }
+    return year + "-" + month + "-" + day;
+  },
+  dateAddDay: function dateAddDay(date, days) {
+    date = date.setDate(date.getDate() + days);
+    return new Date(date);
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 44 */,
+/* 45 */,
+/* 46 */,
+/* 47 */,
+/* 48 */,
+/* 49 */,
+/* 50 */,
+/* 51 */,
+/* 52 */,
+/* 53 */,
+/* 54 */,
+/* 55 */,
+/* 56 */,
+/* 57 */,
+/* 58 */,
+/* 59 */,
+/* 60 */,
+/* 61 */,
+/* 62 */,
+/* 63 */,
+/* 64 */,
+/* 65 */,
+/* 66 */,
+/* 67 */
+/*!***************************************************************************!*\
+  !*** /Users/gyh/workplace/class-schedule/class_schedule_uniapp/config.js ***!
+  \***************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// 应用全局配置 -- global_data
+module.exports = {
+  // 域名
+  baseUrl: 'http://localhost:8080',
+  // 
+  appInfo: {
+    name: 'class_schedule_uniapp',
+    version: '0.0.0',
+    logo: "/static/logo.png",
+    agreements: []
+  }
+};
 
 /***/ })
 ]]);

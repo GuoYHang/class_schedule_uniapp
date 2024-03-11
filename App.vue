@@ -1,17 +1,24 @@
 <script>
+	
+	import config from './config.js'
+	
 	export default {
+		
 		onLaunch: function() {
-			console.log('App Launch')
+			this.initApp()
 		},
-		onShow: function() {
-			console.log('App Show')
-		},
-		onHide: function() {
-			console.log('App Hide')
+		
+		methods: {
+			// 初始化app
+			initApp: function() {
+				this.globalData.config = config
+			}
 		}
 	}
 </script>
 
-<style>
+<style lang="scss">
 	/*每个页面公共css */
+	@import '@/static/scss/index.scss'
+	
 </style>
